@@ -39,19 +39,18 @@ from Leanpub.com:
 * [Report Writing for Data Science in
   R](https://leanpub.com/reportwriting), by Roger D. Peng
 
+* [Mastering Software Development in R](https://leanpub.com/msdr), by Roger D. Peng, Sean Kross, and G. Brooke Anderson (you can read this book [on the web](http://bookdown.org/rdpeng/RProgDA))
+
 The following books may also be useful and are available in web format only:
 
 * [R Programming for Research](https://geanders.github.io/RProgrammingForResearch/), by Brooke Anderson and Rachel Severson
 
-* [Mastering Software Development in
-  R](http://rdpeng.github.io/RProgDA), by Roger D. Peng, Sean Kross,
-  and Brooke Anderson
 
 ## Software
 
-We will make heavy use of R in this course, so you should have R installed. You can obtain R from the [Comprehensive R Archive Network](https://cran.rstudio.com). There are versions available for Mac, Windows, and Unix/Linux. This software is **required** for this course.	
+We will make heavy use of R in this course, so you must have R installed. You can obtain R from the [Comprehensive R Archive Network](https://cran.rstudio.com). There are versions available for Mac, Windows, and Unix/Linux. This software is **required** for this course.	
 
-I will also make use of the RStudio interactive development environment (IDE). RStudio requires that R be installed, and so is a kind of "add-on" to R. I **strongly** recommend that you install this software. You can obtain the RStudio Desktop from the [RStudio web site](https://www.rstudio.com/products/rstudio/download3/).
+I will also make use of the RStudio interactive development environment (IDE). RStudio requires that R be installed, and so is a kind of "add-on" to R. RStudio IDE is **required** for this course. You can obtain the RStudio Desktop from the [RStudio web site](https://www.rstudio.com/products/rstudio/download3/).
 
 ## Homework
 
