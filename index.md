@@ -15,7 +15,7 @@ This course covers programming and other computer skills required
 
 Schedule
 
-* Lecture: T/Th 1:30—2:50am W2008 
+* Lecture: T/Th 1:30—2:50pm W2008 
 * Instructor Office Hour: W 12-1pm in E3535
 
 Instructor
