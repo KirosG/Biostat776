@@ -2,12 +2,10 @@ title: "Statistical Computing"
 left:
   - text: "Home"
     href: index.html
-  - text: "Syllabus"
-    href: syllabus.html
+  - text: "Schedule"
+    href: schedule.html
   - text: "Homework"
     href: homework.html
-  - text: "Projects"
-    href: projects.html
   - text: "Staff"
     menu:
       - text: "Instructors"

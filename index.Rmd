@@ -14,14 +14,14 @@ This course covers programming and other computer skills required
 
 Schedule
 
-* Lecture: T/Th 1:30—2:50am W2008 
-* Instructor Office Hour: W 12-1pm in E3535
+* Lecture: Tuesday/Thursday 1:30—2:50pm W2008 
+* Instructor Office Hour: Wednesday 11:30am--1:30pm in E3535
 
 Instructor
 
 * Roger D. Peng
 * Office: E3535 (Bloomberg School of Public Health) 
-* Email: rdpeng@jhu.edu
+* Email: rdpeng @ jhu.edu
 * Phone: 5-2468
 
 ## Textbooks
@@ -40,11 +40,11 @@ from Leanpub.com:
 
 The following books may also be useful and are available in web format only:
 
-* [R Programming for Research](https://geanders.github.io/RProgrammingForResearch/), by Brooke Anderson and Rachel Severson
+* [R Programming for Research](https://geanders.github.io/RProgrammingForResearch/), by G. Brooke Anderson and Rachel Severson
 
 * [Mastering Software Development in
-  R](http://rdpeng.github.io/RProgDA), by Roger D. Peng, Sean Kross,
-  and Brooke Anderson
+  R](https://leanpub.com/msdr), by Roger D. Peng, Sean Kross,
+  and G. Brooke Anderson (you can read this book [on the web](https://bookdown.org/rdpeng/RProgDA/))
 
 ## Software
 

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Syllabus</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/journal.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 61px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+
+.section h2 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h3 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h4 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h5 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h6 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Statistical Computing</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="schedule.html">Schedule</a>
+</li>
+<li>
+  <a href="homework.html">Homework</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Staff
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Instructors</li>
+    <li>
+      <a href="http://www.biostat.jhsph.edu/~rpeng/">Roger Peng</a>
+    </li>
+    <li class="dropdown-header">Teaching Assistants</li>
+    <li>
+      <a href="https://www.jhsph.edu/departments/biostatistics/directory/students/phd.html">Weixiang Fang</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="resources.html">Resources</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/rdpeng/Biostat776">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Syllabus</h1>
+
+</div>
+
+
+<p>All lecture slides are provided in PDF format. All lectures take place 1:30-2:50pm in W2008 at 615 N Wolfe St.</p>
+<p>Textbook key</p>
+<ul>
+<li>RPDS: R Programming for Data Science</li>
+<li>RWDSR: Report Writing for Data Science in R</li>
+<li>MSDR: Mastering Software Development in R</li>
+<li>RPR: R Programming for Research</li>
+<li>EDAR: Exploratory Data Analysis with R</li>
+</ul>
+<table style="width:62%;">
+<colgroup>
+<col width="8%" />
+<col width="9%" />
+<col width="8%" />
+<col width="36%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Date</th>
+<th align="left">Lecture Slides</th>
+<th align="left">Texts</th>
+<th align="left">Other Resources &amp; Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">9/1</td>
+<td align="left"><a href="../notes/pdf/introduction.pdf">Introduction, logistics, and major themes</a>; <a href="../notes/pdf/overview.pdf">Overview of R</a></td>
+<td align="left"><a href="https://leanpub.com/rprogramming">R Programming for Data Science</a>, <a href="https://geanders.github.io/RProgrammingForResearch/">R Programming for Research</a>, <a href="http://bookdown.org/rdpeng/RProgDA">Mastering Software Development in R</a></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">9/6</td>
+<td align="left"><a href="../notes/pdf/ReproducibleResearch.pdf">Reproducible research</a>; <a href="../notes/pdf/markdown.pdf">Markdown</a>; <a href="../notes/pdf/knitr.pdf">knitr</a></td>
+<td align="left">Ch. 9 of <a href="https://leanpub.com/reportwriting">RWDSR</a></td>
+<td align="left"><a href="http://simplystatistics.org/2015/11/16/so-you-are-getting-crushed-on-the-internet-the-new-normal-for-academics/">Getting crushed</a>; <a href="http://simplystatistics.org/2015/12/11/instead-of-research-on-reproducibility-just-do-reproducible-research/">Just make your work reproducible</a></td>
+</tr>
+<tr class="odd">
+<td align="left">9/8</td>
+<td align="left"><a href="../notes/pdf/gettingcleaning.pdf">Getting and cleaning data</a>; <a href="../notes/pdf/dplyr.pdf">dplyr</a></td>
+<td align="left"><a href="https://bookdown.org/rdpeng/rprogdatascience/using-the-readr-package.html">Ch. 7</a> of RPDS; <a href="https://bookdown.org/rdpeng/rprogdatascience/managing-data-frames-with-the-dplyr-package.html">Ch. 13</a> of RPDS; <a href="http://bookdown.org/rdpeng/RProgDA/the-importance-of-tidy-data.html">Sections 1.2 through 1.5</a> of MSDR</td>
+<td align="left"><a href="http://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">dplyr cheat sheet</a></td>
+</tr>
+<tr class="even">
+<td align="left">9/13</td>
+<td align="left"><a href="../notes/pdf/Dates.pdf">Working with dates/times</a>; <a href="../notes/pdf/regex.pdf">regular expressions</a>; <a href="../notes/pdf/regex_in_R.pdf">regex in R</a></td>
+<td align="left"><a href="https://bookdown.org/rdpeng/RProgDA/working-with-dates-times-time-zones.html">Section 1.6</a> of MSDR; <a href="https://bookdown.org/rdpeng/rprogdatascience/dates-and-times.html">Ch. 12</a> of RPDS</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">9/15</td>
+<td align="left"><strong>LECTURE CANCELLED</strong></td>
+<td align="left"><a href="https://bookdown.org/rdpeng/rprogdatascience/r-nuts-and-bolts.html">Ch. 5</a> of RPDS</td>
+<td align="left"><a href="../notes/pdf/r-nuts-bolts.pdf">R language nitty gritty</a></td>
+</tr>
+<tr class="even">
+<td align="left">9/16</td>
+<td align="left"><strong>Homework 1 due</strong></td>
+<td align="left"><em>Please submit your homework through the <a href="https://courseplus.jhu.edu">Courseplus</a> dropbox</em></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">9/20</td>
+<td align="left"><a href="../notes/pdf/principlesgraphics.pdf">Principles of data graphics</a>; <a href="../notes/pdf/ggplot2_part1.pdf">ggplot2 (part 1)</a></td>
+<td align="left"><a href="https://bookdown.org/rdpeng/exdata/principles-of-analytic-graphics.html">Ch. 5</a> of EDAR; <a href="https://bookdown.org/rdpeng/exdata/plotting-systems.html">Ch. 7</a> of EDAR; <a href="https://bookdown.org/rdpeng/exdata/the-ggplot2-plotting-system-part-1.html">Ch. 14</a> of EDAR</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">9/22</td>
+<td align="left"><a href="../notes/pdf/ggplot2_part2.pdf">Plotting data with ggplot2 (part 2)</a>; <a href="../notes/pdf/grdevices.pdf">Graphics devices</a></td>
+<td align="left"><a href="https://bookdown.org/rdpeng/exdata/the-ggplot2-plotting-system-part-2.html">Ch. 15</a> of EDAR; <a href="https://bookdown.org/rdpeng/exdata/graphics-devices.html">Ch. 8</a> of EDAR</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">9/27</td>
+<td align="left"><a href="../notes/pdf/control.pdf">Control structures</a>; <a href="../notes/pdf/functions.pdf">functions</a></td>
+<td align="left"><a href="https://bookdown.org/rdpeng/rprogdatascience/control-structures.html">Ch. 14</a> of RPDS; <a href="http://rdpeng.github.io/RProgDA/functions.html">Ch 2.2</a> of MSDR</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">9/29</td>
+<td align="left"><a href="../notes/pdf/functions2.pdf">More on Functions</a>; <a href="../notes/pdf/loop_functions.pdf">Loop functions</a></td>
+<td align="left"><a href="https://bookdown.org/rdpeng/rprogdatascience/loop-functions.html">Ch. 16</a> of RPDS; <a href="https://bookdown.org/rdpeng/rprogdatascience/functions.html">Ch. 15</a> of RPDS</td>
+</tr>
+<tr class="odd">
+<td align="left">10/4</td>
+<td align="left"><a href="../notes/pdf/debugging.pdf">Debugging</a>, <a href="../notes/pdf/RProfiler.pdf">Profiling</a>; <a href="../notes/pdf/error_handling.pdf">Error handling</a></td>
+<td align="left"><a href="https://bookdown.org/rdpeng/rprogdatascience/debugging.html">Ch 18</a> of RPDS; <a href="https://bookdown.org/rdpeng/rprogdatascience/profiling-r-code.html">Ch 19</a> of RPDS; <a href="http://rdpeng.github.io/RProgDA/error-handling-and-generation.html">Ch 2.4</a> of MSDR</td>
+</tr>
+<tr class="even">
+<td align="left">10/6</td>
+<td align="left"><a href="../notes/pdf/parallel.pdf">Parallel Programming</a>; <a href="../notes/pdf/RColors.pdf">Color</a></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">10/7</td>
+<td align="left"><strong>Homework 2 due</strong></td>
+<td align="left"><em>Please submit your homework through the <a href="https://courseplus.jhu.edu">Courseplus</a> dropbox</em></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">10/11</td>
+<td align="left"><a href="../notes/pdf/Rpackages.pdf">Building R packages</a></td>
+<td align="left"><a href="https://github.com/rdpeng/daprocedures/blob/master/lists/Rpackage_preflight.md">R packages pre-flight check list</a></td>
+<td align="left"><a href="http://www.rstudio.com/wp-content/uploads/2015/06/devtools-cheatsheet.pdf">RStudio R package cheat sheet</a></td>
+</tr>
+<tr class="odd">
+<td align="left">10/13</td>
+<td align="left"><a href="../notes/pdf/classes-methods.pdf">Object oriented programming</a></td>
+<td align="left"><a href="https://bookdown.org/rdpeng/RProgDA/object-oriented-programming.html">Ch 2.9</a> of MSDR</td>
+<td align="left"><a href="../notes/pdf/S3polygon.pdf">S3 polygon class/methods</a></td>
+</tr>
+<tr class="even">
+<td align="left">10/18</td>
+<td align="left"><a href="../notes/pdf/functional_programming.pdf">Functional programming</a></td>
+<td align="left"><a href="https://bookdown.org/rdpeng/RProgDA/functional-programming.html">Ch 2.3</a> of MSDR</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">10/20</td>
+<td align="left"><a href="../notes/pdf/codingstandards.pdf">Coding Standards</a>; <a href="../notes/pdf/manipulate.pdf">manipulate</a>; <a href="../notes/pdf/shiny.pdf">Shiny apps</a></td>
+<td align="left"><a href="../shiny/autocomplete.zip">Autocomplete</a>; <a href="../shiny/ozonetemp.zip">Ozone and Temperature</a></td>
+<td align="left"><a href="../notes/manipulate.R">manipulate.R</a></td>
+</tr>
+<tr class="even">
+<td align="left">10/25</td>
+<td align="left"><a href="../notes/pdf/largedatasets.pdf">Working with large datasets</a></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">10/28</td>
+<td align="left"><strong>Homework 3 due</strong></td>
+<td align="left"><em>Please submit your homework through the <a href="https://courseplus.jhu.edu">Courseplus</a> dropbox</em></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
