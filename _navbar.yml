@@ -1,4 +1,4 @@
-title: "Advanced Data Science"
+title: "Statistical Computing"
 left:
   - text: "Home"
     href: index.html
@@ -11,20 +11,14 @@ left:
   - text: "Staff"
     menu:
       - text: "Instructors"
-      - text: "Stephanie Hicks"
-        href: http://stephaniehicks.com/
       - text: "Roger Peng"
         href: http://www.biostat.jhsph.edu/~rpeng/
       - text: "Teaching Assistants"
-      - text: "Guoqing Wang"
+      - text: "Weixiang Fang"
         href: https://www.jhsph.edu/departments/biostatistics/directory/students/phd.html
-      - text: "Bingkai Wang"
-        href: https://www.jhsph.edu/departments/biostatistics/directory/students/phd.html
-  - text: "Discussion"
-    href: discussion.html
   - text: "Resources"
     href: resources.html
 right:
   - icon: fa-github fa-lg
-    href: https://github.com/jhu-advdatasci/2018
+    href: https://github.com/rdpeng/Biostat776
     
