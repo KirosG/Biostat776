@@ -38,13 +38,14 @@ from Leanpub.com:
 * [Report Writing for Data Science in
   R](https://leanpub.com/reportwriting), by Roger D. Peng
 
-The following books may also be useful and are available in web format only:
-
-* [R Programming for Research](https://geanders.github.io/RProgrammingForResearch/), by G. Brooke Anderson and Rachel Severson
-
 * [Mastering Software Development in
   R](https://leanpub.com/msdr), by Roger D. Peng, Sean Kross,
   and G. Brooke Anderson (you can read this book [on the web](https://bookdown.org/rdpeng/RProgDA/))
+
+The following books may also be useful and is available in web format only:
+
+* [R Programming for Research](https://geanders.github.io/RProgrammingForResearch/), by G. Brooke Anderson and Rachel Severson
+
 
 ## Software
 
@@ -55,7 +56,7 @@ I will also make use of the RStudio interactive development environment (IDE). R
 ## Homework
 
 There will be 3 assignments, due roughly every 3 weeks. Homeworks will be
-submitted electronically via the Dropbox on the CoursePlus web site.
+submitted electronically via the Drop Box on the CoursePlus web site.
 
 The homework assignments will be due on 
 
@@ -77,6 +78,10 @@ source before your homework assignment is submitted for grading.
 ## Exams
 
 There are no exams in this course.
+
+## Grading
+
+Grades in the course will be based on the three submitted homeworks with a percentage of the final grade being apportioned to each assignment. Grades for the homeworks and the final grade will be issued via the CoursePlus grade book.
 
 ## Academic Ethics and Student Conduct Code
 
