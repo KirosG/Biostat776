@@ -1,11 +1,4 @@
-_site
-.sass-cache
-.jekyll-metadata
-en_US.twitter.txt.bz2
-commit_logs_strip.txt.bz2
-cache
-commit_logs.txt.bz2
-_homework/data
-notes/datafile
-
 .Rproj.user
+.Rhistory
+.RData
+.Ruserdata
