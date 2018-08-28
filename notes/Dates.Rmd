@@ -1,0 +1,185 @@
+% Dates and Times in R
+% Biostatistics 140.776
+%
+
+```{r, include=FALSE}
+options(width = 50)
+knitr::opts_chunk$set(comment = NA)
+```
+
+# Dates and Times in R
+
+R has developed a special representation of dates and times
+
+- Dates are represented by the `Date` class
+
+- Times are represented by the `POSIXct` or the `POSIXlt` class
+
+- Dates are stored internally as the number of days since 1970-01-01
+
+- Times are stored internally as the number of seconds since
+  1970-01-01
+
+# The `lubridate` package
+
+* The `lubridate` package is a very useful package for dealing with all the little annoying aspects of dates/times
+
+* Largely replaces the default date/time functions in base R
+
+* Methods for date/time arithmetic
+
+* Handles time zones, leap year, leap seconds, etc.
+
+
+# Dates in R
+
+Dates are represented by the `Date` class and can be coerced from a character string using the `ymd()` function.
+
+```{r,message=FALSE}
+library(lubridate)
+x <- ymd("1970-01-01")
+x
+```
+
+`Date` objects have their own special print methods that will always format as "YYYY-MM-DD".
+
+# Alternate Formulations
+
+Different locales have different ways formatting dates
+
+```{r}
+ymd("2016-09-13")  ## International standard
+mdy("09-13-2016")  ## Mostly U.S.
+dmy("13-09-2016")  ## Europe
+```
+All of the above are valid and lead to the exact same object.
+
+# Times in R
+
+Times are represented using the `POSIXct` or the `POSIXlt` class
+
+- `POSIXct` is just a very large integer under the hood; it is a useful class when you want to store times in something like a data frame
+
+- `POSIXlt` is a list underneath and it stores a bunch of other useful information like the day of the week, day of the year, month, day of the month
+
+There are a number of generic functions that work on dates and times
+
+- `weekdays`: give the day of the week
+
+- `month`: give the month name (possibly abbreviated)
+
+- `quarter`: give the quarter number (1, 2, 3, 4)
+
+
+
+# Times in R
+
+Times can be coerced from a character string with `ymd_hms()`
+
+```{r}
+ymd_hms("2016-09-13 14:00:00")
+ymd_hms("2016-09-13 14:00:00", tz = "America/New_York")
+ymd_hms("2016-09-13 14:00:00", tz = "")
+```
+
+# Time Zones!
+
+Time zones were created to make your data analyses more difficult.
+
+* `ymd_hms()` function will by default use UTC as the time zone
+
+* Specifying `tz = ""` will use the local time zone
+
+* Better to specify time zone when possible to avoid ambiguity
+
+You can go to Wikipedia to find the list of time zones [http://goo.gl/xJ8K6q]()
+
+
+
+# Specifying Times in R
+
+Finally, there is the `strptime()` function in case your dates are
+written in a different format
+
+```{r,tidy=FALSE}
+datestring <- c("January 10, 2012 10:40", 
+                "December 9, 2011 9:10")
+x <- strptime(datestring, "%B %d, %Y %H:%M", 
+              tz = "America/Los_Angeles")
+x
+```
+
+* Check `?strptime` for details of formatting strings
+
+* When reading in data with `read_csv()`, you may need to read in as character first and then convert to date/time
+
+
+# Operations on Dates and Times
+
+You can add and subtract dates and times. You can do comparisons too (i.e. `==`, `<=`)
+
+```{r, error=TRUE}
+x <- ymd("2012-01-01", tz = "")  ## Midnight
+y <- dmy_hms("9 Jan 2011 11:34:21", tz = "")
+x - y
+x + y  ## Nope!
+```
+
+
+# Operations on Dates and Times
+
+```{r}
+y + 1  ## Add a number to a time
+y <- date(y)  ## Just keep the date portion
+y
+y + 1  ## Add a number to a date
+```
+
+# Operations on Dates and Times
+
+Even keeps track of leap years, leap seconds, daylight savings, and time zones.
+
+```{r}
+x <- ymd("2012-03-01")
+y <- ymd("2012-02-28")
+x - y
+x <- ymd_hms("2012-10-25 01:00:00", tz = "")
+y <- ymd_hms("2012-10-25 06:00:00", tz = "GMT")
+y - x
+```
+
+# Extracting Elements of Dates/Times
+
+There are a set of helper functions in `lubridate` that can extract sub-elements of dates/times
+
+```{r}
+x <- ymd_hms(c("2012-10-25 01:13:46",
+               "2015-04-23 15:11:23"), tz = "")
+year(x)
+month(x)
+day(x)
+weekdays(x)
+```
+
+
+# Extracting Elements of Dates/Times
+
+```{r}
+minute(x)
+second(x)
+hour(x)
+week(x)
+```
+
+# Summary
+
+- Dates and times have special classes in R that allow for numerical and statistical calculations
+
+- Dates use the `Date` class
+
+- Times use the `POSIXct` and `POSIXlt` class
+
+- Character strings can be coerced to Date/Time classes using the `ymd()` and `ymd_hms()` functions. In strange cases, you can use the `strptime()`or the `as.Date()` functions.
+
+- The `lubridate` package is essential for manipulating date/time data
+

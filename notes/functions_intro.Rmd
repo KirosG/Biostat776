@@ -1,0 +1,9 @@
+% Introduction to Functions
+% Biostatistics 140.776
+%
+
+```{r, include=FALSE}
+options(width = 50)
+knitr::opts_chunk$set(comment = NA)
+```
+

@@ -1,0 +1,13 @@
+## Introduction
+
+Let's first simulate some data.
+```{r simulatedata,echo=TRUE}
+x <- rnorm(100); y <- x + rnorm(100, sd = 0.5)
+```
+Here is a scatterplot of the data.
+```{r scatterplot,fig.height=4}
+library(ggplot2)
+qplot(x, y, main = "My Simulated Data")
+```
+
+
