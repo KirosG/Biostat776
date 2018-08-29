@@ -14,8 +14,6 @@ left:
       - text: "Teaching Assistants"
       - text: "Weixiang Fang"
         href: https://www.jhsph.edu/departments/biostatistics/directory/students/phd.html
-  - text: "Resources"
-    href: resources.html
 right:
   - icon: fa-github fa-lg
     href: https://github.com/rdpeng/Biostat776
