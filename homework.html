@@ -234,7 +234,121 @@ $(document).ready(function () {
 </div>
 
 
-<p>Coming soon!</p>
+<div id="tidy-data" class="section level1">
+<h1>Tidy Data</h1>
+<div id="due-921" class="section level3">
+<h3>DUE: 9/21</h3>
+<p>The goal of the first assignment is to take datasets that are either messy or simply not tidy and to make them tidy datasets. The objective is to gain some familiarity with the functions in the <code>dplyr</code>, <code>tidyr</code>, and <code>readr</code> packages.</p>
+<p>Before attempting this assignment, you should first install the <code>dplyr</code> and <code>tidyr</code> packages if you haven’t already. This can be done with the <code>install.packages()</code> function.</p>
+<pre class="r"><code>install.packages(c(&quot;dplyr&quot;, &quot;tidyr&quot;, &quot;readr&quot;))</code></pre>
+<p>Running this function will also install a host of other packages on which these two depend so it make take a minute or two.</p>
+</div>
+<div id="homework-submission" class="section level3">
+<h3>Homework Submission</h3>
+<p>Please write up your homework using R markdown and knitr. Compile your document as an HTML file submit your HTML file to the dropbox on Courseplus. Please <strong>show all your code</strong> for each of the answers to the three parts.</p>
+</div>
+<div id="reading" class="section level3">
+<h3>Reading</h3>
+<p>For this homework, the following readings may be helpful:</p>
+<ul>
+<li><p><a href="https://bookdown.org/rdpeng/rprogdatascience/using-the-readr-package.html">Chapter 7 of R Programming for Data Science</a></p></li>
+<li><p><a href="https://bookdown.org/rdpeng/rprogdatascience/managing-data-frames-with-the-dplyr-package.html">Chapter 13 of R Programming for Data Science</a></p></li>
+<li><p><a href="http://bookdown.org/rdpeng/RProgDA/the-importance-of-tidy-data.html">Sections 1.2 through 1.5 of Mastering Software Development in R</a></p></li>
+</ul>
+</div>
+<div id="part-1" class="section level3">
+<h3>Part 1</h3>
+<p>Load the <code>WorldPhones</code> dataset in the <code>datasets</code> package with</p>
+<pre class="r"><code>library(datasets)
+data(WorldPhones)
+WorldPhones</code></pre>
+<pre><code>     N.Amer Europe Asia S.Amer Oceania Africa Mid.Amer
+1951  45939  21574 2876   1815    1646     89      555
+1956  60423  29990 4708   2568    2366   1411      733
+1957  64721  32510 5230   2695    2526   1546      773
+1958  68484  35218 6662   2845    2691   1663      836
+1959  71799  37598 6856   3000    2868   1769      911
+1960  76036  40341 8220   3145    3054   1905     1008
+1961  79831  43173 9053   3338    3224   2005     1076</code></pre>
+<p>This dataset gives the number of telephones in various regions of the world (in thousands). The regions are: North America, Europe, Asia, South America, Oceania, Africa, Central America and data are available for the years 1951, 1956, 1957, 1958, 1959, 1960, 1961.</p>
+<p>Use the functions in <code>dplyr</code> and <code>tidyr</code> to produce a data frame that looks like this.</p>
+<pre><code>   year  country number
+1  1951   N.Amer  45939
+2  1956   N.Amer  60423
+3  1957   N.Amer  64721
+4  1958   N.Amer  68484
+5  1959   N.Amer  71799
+6  1960   N.Amer  76036
+7  1961   N.Amer  79831
+8  1951   Europe  21574
+9  1956   Europe  29990
+10 1957   Europe  32510
+11 1958   Europe  35218
+12 1959   Europe  37598
+13 1960   Europe  40341
+14 1961   Europe  43173
+15 1951     Asia   2876
+16 1956     Asia   4708
+17 1957     Asia   5230
+18 1958     Asia   6662
+19 1959     Asia   6856
+20 1960     Asia   8220
+21 1961     Asia   9053
+22 1951   S.Amer   1815
+23 1956   S.Amer   2568
+24 1957   S.Amer   2695
+25 1958   S.Amer   2845
+26 1959   S.Amer   3000
+27 1960   S.Amer   3145
+28 1961   S.Amer   3338
+29 1951  Oceania   1646
+30 1956  Oceania   2366
+31 1957  Oceania   2526
+32 1958  Oceania   2691
+33 1959  Oceania   2868
+34 1960  Oceania   3054
+35 1961  Oceania   3224
+36 1951   Africa     89
+37 1956   Africa   1411
+38 1957   Africa   1546
+39 1958   Africa   1663
+40 1959   Africa   1769
+41 1960   Africa   1905
+42 1961   Africa   2005
+43 1951 Mid.Amer    555
+44 1956 Mid.Amer    733
+45 1957 Mid.Amer    773
+46 1958 Mid.Amer    836
+47 1959 Mid.Amer    911
+48 1960 Mid.Amer   1008
+49 1961 Mid.Amer   1076</code></pre>
+<p>You may need to use functions outside these packages to obtain this result.</p>
+</div>
+<div id="part-2" class="section level3">
+<h3>Part 2</h3>
+<p>Use the <code>readr</code> package to read the <a href="data/SPEC_2014.csv.bz2">SPEC_2014.csv.bz2</a> data file in to R. This file contains daily levels of fine particulate matter (PM2.5) chemical constituents across the United States. The data are measured at a network of federal, state, and local monitors and assembled by the EPA.</p>
+<p>In this dataset, the <code>Sample.Value</code> column provides the level of the indicated chemical constituent and the <code>Parameter.Name</code> column provides the name of the chemical constituent. The combination of a <code>State.Code</code>, a <code>County.Code</code>, and a <code>Site.Num</code>, uniquely identifies a monitoring site (the location of which is provided by the <code>Latitude</code> and <code>Longitude</code> columns).</p>
+<p>For all of the questions below, you can ignore the missing values in the dataset, so when taking averages, just remove the missing values before taking the average.</p>
+<p>Use the functions in the <code>dplyr</code> package to answer the following questions:</p>
+<ol style="list-style-type: decimal">
+<li><p>What is average value of “Bromine PM2.5 LC” in the state of Wisconsin in this dataset?</p></li>
+<li><p>Calculate the average of each chemical constituent across all states/monitors and all time points. Which constituent has the highest average level?</p></li>
+<li><p>Which monitoring site has the highest levels of “Sulfate PM2.5 LC”? Indicate the state code, county code, and site number.</p></li>
+<li><p>What is the difference in the average levels of “EC PM2.5 LC TOR” between California and Arizona</p></li>
+<li><p>What are the median levels of “OC PM2.5 LC TOR” and “EC PM2.5 LC TOR” in the western and eastern U.S.? Define western as any monitoring location that has a <code>Longitude</code> less than -100.</p></li>
+</ol>
+</div>
+<div id="part-3" class="section level3">
+<h3>Part 3</h3>
+<p>Use the <code>readxl</code> package to read the file <a href="data/aqs_sites.xlsx">aqs_sites.xlsx</a> into R (you may need to install the package first). You may get some warnings when reading in the data but you can ignore these for now.</p>
+<p>This file contains metadata about each of the monitoring sites in the EPA’s monitoring system. In particular, the <code>Land Use</code> and <code>Location Setting</code> variables contain information about what kinds of areas the monitors are located in (i.e. “residential” vs. “forest”).</p>
+<p>Use the functions in the <code>dplyr</code> and <code>tidyr</code> packages to answer the following questions.</p>
+<ol style="list-style-type: decimal">
+<li><p>How many monitoring sites are labelled as both “RESIDENTIAL” for <code>Land Use</code> and “SUBURBAN” for <code>Location Setting</code>?</p></li>
+<li><p>What are the median levels of “OC PM2.5 LC TOR” and “EC PM2.5 LC TOR” amongst monitoring sites that are labelled as both “RESIDENTIAL” and “SUBURBAN” in the eastern U.S., where eastern is defined as <code>Longitude</code> greater than or equal to -100?</p></li>
+</ol>
+</div>
+</div>
 
 
 
