@@ -107,7 +107,7 @@ You may need to use functions outside these packages to obtain this result.
 
 ### Part 2
 
-Use the `readr` package to read the [SPEC_2014.csv.bz2](data/SPEC_2014.csv.bz2) data file in to R. This file contains daily levels of fine particulate matter (PM2.5) chemical constituents across the United States. The data are measured at a network of federal, state, and local monitors and assembled by the EPA. 
+Use the `readr` package to read the [SPEC_2014.csv.gz](data/SPEC_2014.csv.gz) data file in to R. This file contains daily levels of fine particulate matter (PM2.5) chemical constituents across the United States. The data are measured at a network of federal, state, and local monitors and assembled by the EPA. 
 
 In this dataset, the `Sample.Value` column provides the level of the indicated chemical constituent and the `Parameter.Name` column provides the name of the chemical constituent. The combination of a `State.Code`, a `County.Code`, and a `Site.Num`, uniquely identifies a monitoring site (the location of which is provided by the `Latitude` and `Longitude` columns).
 
