@@ -1,3 +1,8 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 % Managing Data with `dplyr` and `tidyr`
 % Biostatistics 140.776
 %
@@ -23,16 +28,15 @@ The data frame is a key data structure in statistics and in R.
 
 # dplyr
 
-* Developed by Hadley Wickham of RStudio
+* Developed by RStudio
 
-* An optimized and distilled version of `plyr` package (also by Hadley)
-
-* Does not provide any "new" functionality per se, but **greatly**
-  simplifies existing functionality in R
+* An optimized and distilled version of `plyr` package (by Hadley Wickham)
 
 * Provides a "grammar" (in particular, verbs) for data manipulation
 
 * Is **very** fast, as many key operations are coded in C++
+
+* Functions (verbs) can be chained together via a "pipe" operator
 
 
 # dplyr Verbs
@@ -49,11 +53,9 @@ The data frame is a key data structure in statistics and in R.
 
 * `mutate`: add new variables/columns or transform existing variables
 
-* `summarise` / `summarize`: generate summary statistics of different
-  variables in the data frame, possibly within strata
+* `summarize` / `summarise`: generate summary statistics of different variables in the data frame, possibly within strata
 
-There is also a handy `print` method that prevents you from printing a
-lot of data to the console.
+There is also a handy `print` method that prevents you from printing a lot of data to the console.
 
 
 
@@ -69,6 +71,8 @@ lot of data to the console.
 
 * Data frames must be properly formatted and annotated for this to all
   be useful
+  
+* There are no "inputs" and "results"; it's all just *data*
 
 
 # Load the `dplyr` package
@@ -83,18 +87,19 @@ library(dplyr)
 
 # `select`
 
-```{r}
-chicago <- readRDS("chicago.rds")
-dim(chicago)
-head(select(chicago, 1:5))
+```{r,message=FALSE}
+library(readr)
+specdata <- read_csv("SPEC_2014.csv.gz")
+dim(specdata)
+head(select(specdata, 1:5))
 ```
 
 
 # `select`
 
 ```{r}
-names(chicago)[1:3]
-head(select(chicago, city:dptp))
+names(specdata)[1:3]
+head(select(specdata, State.Code:Site.Num))
 ```
 
 # `select`
@@ -102,15 +107,15 @@ head(select(chicago, city:dptp))
 In dplyr you can do
 
 ```{r,eval=FALSE}
-head(select(chicago, -(city:dptp)))
+head(select(specdata, -(State.Code:Site.Num)))
 ```
 
 Equivalent base R
 
 ```{r,eval=FALSE}
-i <- match("city", names(chicago))
-j <- match("dptp", names(chicago))
-head(chicago[, -(i:j)])
+i <- match("State.Code", names(specdata))
+j <- match("Site.Num", names(specdata))
+head(specdata[, -(i:j)])
 ```
 
 
@@ -118,15 +123,16 @@ head(chicago[, -(i:j)])
 # `filter`
 
 ```{r}
-chic.f <- filter(chicago, pm25tmean2 > 30)
-head(select(chic.f, 1:3, pm25tmean2), 10)
+specdata.f <- filter(specdata, Parameter.Name == "Sulfate PM2.5 LC")
+select(specdata.f, 1:3, Parameter.Name)
 ```
 
 # `filter`
 
 ```{r}
-chic.f <- filter(chicago, pm25tmean2 > 30 & tmpd > 80)
-head(select(chic.f, 1:3, pm25tmean2, tmpd), 10)
+specdata.f <- filter(specdata, Parameter.Name == "Sulfate PM2.5 LC" 
+                     & State.Name == "Texas")
+select(specdata.f, 1:3, Parameter.Name, State.Name)
 ```
 
 
@@ -136,9 +142,9 @@ Reordering rows of a data frame (while preserving corresponding order
 of other columns) is normally a pain to do in R.
 
 ```{r}
-chicago <- arrange(chicago, date)
-head(select(chicago, date, pm25tmean2), 3)
-tail(select(chicago, date, pm25tmean2), 3)
+specdata <- arrange(specdata, Date.Local)
+head(select(specdata, Date.Local, Parameter.Name, Sample.Value), 3)
+tail(select(specdata, Date.Local, Parameter.Name, Sample.Value), 3)
 ```
 
 # `arrange`
@@ -146,9 +152,9 @@ tail(select(chicago, date, pm25tmean2), 3)
 Columns can be arranged in descending order too.
 
 ```{r}
-chicago <- arrange(chicago, desc(date))
-head(select(chicago, date, pm25tmean2), 3)
-tail(select(chicago, date, pm25tmean2), 3)
+specdata <- arrange(specdata, desc(Date.Local))
+head(select(specdata, Date.Local, Parameter.Name, Sample.Value), 3)
+tail(select(specdata, Date.Local, Parameter.Name, Sample.Value), 3)
 ```
 
 
@@ -157,19 +163,20 @@ tail(select(chicago, date, pm25tmean2), 3)
 Renaming a variable in a data frame in R is surprising hard to do!
 
 ```{r,tidy=FALSE}
-head(chicago[, 1:5], 3)
-chicago <- rename(chicago, dewpoint = dptp, 
-                  pm25 = pm25tmean2)
-head(chicago[, 1:5], 3)
+head(specdata[, 1:7], 3)
+specdata <- rename(specdata, lat = Latitude, 
+                   lon = Longitude)
+head(specdata[, 1:7], 3)
 ```
 
 
 # `mutate`
 
 ```{r, tidy=FALSE}
-chicago <- mutate(chicago, 
-                  pm25detrend=pm25-mean(pm25, na.rm=TRUE))
-head(select(chicago, pm25, pm25detrend))
+specdata <- mutate(specdata, 
+                   city_state = paste(City.Name, State.Name, sep = ", "),
+                   sample_mg = Sample.Value / 1000)
+head(select(specdata, City.Name, State.Name, city_state, sample_mg))
 ```
 
 # `group_by`
@@ -177,13 +184,12 @@ head(select(chicago, pm25, pm25detrend))
 Generating summary statistics by stratum
 
 ```{r, tidy=FALSE}
-chicago <- mutate(chicago, 
-                  tempcat = factor(tmpd > 90, 
-                                   labels = c("cold", "hot")))
-hotcold <- group_by(chicago, tempcat)
-summarize(hotcold, pm25 = mean(pm25, na.rm = TRUE), 
-          o3 = max(o3tmean2, na.rm = TRUE), 
-          no2 = median(no2tmean2, na.rm = TRUE))
+specdata <- mutate(specdata, 
+                   region = factor(lon > -100, 
+                                   labels = c("west", "east")))
+eastwest <- group_by(specdata, region)
+summarize(eastwest, pollutant = mean(Sample.Value, na.rm = TRUE),
+          obs = mean(Observation.Count, na.rm = TRUE))
 ```
 
 
@@ -192,33 +198,52 @@ summarize(hotcold, pm25 = mean(pm25, na.rm = TRUE),
 Generating summary statistics by stratum
 
 ```{r, tidy=FALSE}
-chicago <- mutate(chicago, 
-                  year = as.POSIXlt(date)$year + 1900)
-years <- group_by(chicago, year)
-summarize(years, pm25 = mean(pm25, na.rm = TRUE), 
-          o3 = max(o3tmean2, na.rm = TRUE), 
-          no2 = median(no2tmean2, na.rm = TRUE))
+library(lubridate)
+specdata <- mutate(specdata, month = month(Date.Local))
+months <- group_by(specdata, month)
+months <- filter(months, Parameter.Name == "Sulfate PM2.5 LC")
+summarize(months, sulfate = mean(Sample.Value, na.rm = TRUE))
 ```
 
 ```{r,echo=FALSE}
-chicago$year <- NULL  ## Can't use mutate to create an existing variable
+specdata$month <- NULL  ## Can't use mutate to create an existing variable
 ```
 
 
-# `%>%`
+# `%>%` (pipe operator)
 
 ```{r,tidy=FALSE,eval=FALSE}
-chicago %>% mutate(year = as.POSIXlt(date)$year + 1900) 
-	%>% group_by(year) 
-	%>% summarize(pm25 = mean(pm25, na.rm = TRUE), 
-          o3 = max(o3tmean2, na.rm = TRUE), 
-          no2 = median(no2tmean2, na.rm = TRUE))
+specdata %>% 
+        mutate(month = month(Date.Local)) %>% 
+        filter(Parameter.Name == "Sulfate PM2.5 LC") %>%
+        group_by(month) %>% 
+        summarize(sulfate = mean(Sample.Value, na.rm = TRUE))
 ```
 
 ```{r,echo=FALSE}
-chicago %>% mutate(year = as.POSIXlt(date)$year + 1900) %>% group_by(year) %>% 
-summarize(pm25 = mean(pm25, na.rm = TRUE), o3 = max(o3tmean2, na.rm = TRUE), no2 = median(no2tmean2, na.rm = TRUE))
+specdata %>% 
+        mutate(month = month(Date.Local)) %>% 
+        filter(Parameter.Name == "Sulfate PM2.5 LC") %>%
+        group_by(month) %>% 
+        summarize(sulfate = mean(Sample.Value, na.rm = TRUE))
+```
 
+# `%>%` (pipe operator)
+
+```{r,tidy=FALSE,eval=FALSE}
+specdata %>% 
+        mutate(month = month(Date.Local)) %>% 
+        filter(Parameter.Name == "Sulfate PM2.5 LC") %>%
+        group_by(month, region) %>% 
+        summarize(sulfate = mean(Sample.Value, na.rm = TRUE))
+```
+
+```{r,echo=FALSE}
+specdata %>% 
+        mutate(month = month(Date.Local)) %>% 
+        filter(Parameter.Name == "Sulfate PM2.5 LC") %>%
+        group_by(month, region) %>% 
+        summarize(sulfate = mean(Sample.Value, na.rm = TRUE))
 ```
 
 
@@ -245,27 +270,22 @@ The `tidyr` package helps with manipulation of data frames between "wide" and "l
 # Long Format
 
 ```{r, include=FALSE}
-library(tidyr)
-chicago <- readRDS("chicago.rds")
-chicago <- select(chicago, date, pm10tmean2, o3tmean2, no2tmean2) %>%
-        rename(pm10 = pm10tmean2, o3 = o3tmean2, no2 = no2tmean2) %>%
-        gather(pollutant, level, -date) %>%
-        arrange(date, pollutant)
+spec <- select(specdata, city_state, Date.Local, Parameter.Name, Sample.Value)
 ```
 
-Here are the Chicago pollution data in long format
+Here are the specdata pollution data in long format
 
 ```{r}
-head(chicago)
+head(spec)
 ```
 
 # Long Format
 
 ```{r}
-stats <- group_by(chicago, pollutant) %>% 
-        summarize(mean = mean(level, na.rm = TRUE),
-                  median = median(level, na.rm = TRUE),
-                  max = max(level, na.rm = TRUE))
+stats <- group_by(spec, Parameter.Name) %>% 
+        summarize(mean = mean(Sample.Value, na.rm = TRUE),
+                  median = median(Sample.Value, na.rm = TRUE),
+                  max = max(Sample.Value, na.rm = TRUE))
 stats
 ```
 
@@ -282,7 +302,8 @@ An alternate representation could have three variables: pollutant, statistic, an
 # `gather`
 
 ```{r}
-gather(stats, statistic, value, -pollutant)
+library(tidyr)
+gather(stats, statistic, value, -Parameter.Name)
 ```
 
 # `spread`
@@ -298,15 +319,9 @@ The `spread` function does the inverse of the `gather` function
 # `spread`
 
 ```{r}
-wide <- spread(chicago, pollutant, level) 
+wide <- filter(spec, city_state == "Essex, Maryland") %>%
+        spread(Parameter.Name, Sample.Value) 
 head(wide)
-```
-
-# `spread`
-
-```{r}
-mutate(wide, max = pmax(no2, o3, pm10, na.rm = TRUE)) %>%
-        head
 ```
 
 # `separate`
