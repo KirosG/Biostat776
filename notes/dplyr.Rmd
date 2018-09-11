@@ -1,15 +1,14 @@
 ---
-output: html_document
-editor_options: 
-  chunk_output_type: console
+title: "Managing Data with `dplyr` and `tidyr`"
+subtitle: "Biostatistics 140.776"
+output:
+  beamer_presentation: default
+  ioslides_presentation: default
 ---
-% Managing Data with `dplyr` and `tidyr`
-% Biostatistics 140.776
-%
 
 ```{r, include=FALSE}
-options(width = 50)
-knitr::opts_chunk$set(comment = NA)
+options(width = 50, tibble.print_min = 5)
+knitr::opts_chunk$set(comment = NA, collapse = TRUE)
 ```
 
 # dplyr
@@ -20,8 +19,10 @@ The data frame is a key data structure in statistics and in R.
 
 * Each column represents a variable or measure or characteristic
 
-* Primary implementation that you will use is the default R
+* Primary implementation that you will use is likely the default R
   implementation
+  
+* Modified "upgraded" version in the `tibble` package
 
 * Other implementations, particularly relational databases systems
 
@@ -54,8 +55,6 @@ The data frame is a key data structure in statistics and in R.
 * `mutate`: add new variables/columns or transform existing variables
 
 * `summarize` / `summarise`: generate summary statistics of different variables in the data frame, possibly within strata
-
-There is also a handy `print` method that prevents you from printing a lot of data to the console.
 
 
 
@@ -91,7 +90,10 @@ library(dplyr)
 library(readr)
 specdata <- read_csv("SPEC_2014.csv.gz")
 dim(specdata)
-head(select(specdata, 1:5))
+```
+
+```{r}
+select(specdata, 1:4)
 ```
 
 
@@ -99,15 +101,18 @@ head(select(specdata, 1:5))
 
 ```{r}
 names(specdata)[1:3]
-head(select(specdata, State.Code:Site.Num))
+```
+
+```{r}
+select(specdata, State.Code:Site.Num)
 ```
 
 # `select`
 
 In dplyr you can do
 
-```{r,eval=FALSE}
-head(select(specdata, -(State.Code:Site.Num)))
+```{r, eval=FALSE}
+select(specdata, -(State.Code:Site.Num))
 ```
 
 Equivalent base R
@@ -123,16 +128,18 @@ head(specdata[, -(i:j)])
 # `filter`
 
 ```{r}
-specdata.f <- filter(specdata, Parameter.Name == "Sulfate PM2.5 LC")
+specdata.f <- filter(specdata, 
+                     Parameter.Name == "Sulfate PM2.5 LC")
 select(specdata.f, 1:3, Parameter.Name)
 ```
 
 # `filter`
 
 ```{r}
-specdata.f <- filter(specdata, Parameter.Name == "Sulfate PM2.5 LC" 
+specdata.f <- filter(specdata, 
+                     Parameter.Name == "Sulfate PM2.5 LC" 
                      & State.Name == "Texas")
-select(specdata.f, 1:3, Parameter.Name, State.Name)
+select(specdata.f, 1:2, Parameter.Name, State.Name)
 ```
 
 
@@ -143,18 +150,26 @@ of other columns) is normally a pain to do in R.
 
 ```{r}
 specdata <- arrange(specdata, Date.Local)
-head(select(specdata, Date.Local, Parameter.Name, Sample.Value), 3)
-tail(select(specdata, Date.Local, Parameter.Name, Sample.Value), 3)
+select(specdata, Date.Local, Parameter.Name, 
+       Sample.Value)
+```
+
+
+# `arrange`
+
+```{r}
+tail(select(specdata, Date.Local, Parameter.Name, 
+            Sample.Value), 3)
 ```
 
 # `arrange`
 
-Columns can be arranged in descending order too.
+Rows can be sorted in descending order too.
 
 ```{r}
 specdata <- arrange(specdata, desc(Date.Local))
-head(select(specdata, Date.Local, Parameter.Name, Sample.Value), 3)
-tail(select(specdata, Date.Local, Parameter.Name, Sample.Value), 3)
+select(specdata, Date.Local, Parameter.Name, 
+       Sample.Value)
 ```
 
 
@@ -163,32 +178,45 @@ tail(select(specdata, Date.Local, Parameter.Name, Sample.Value), 3)
 Renaming a variable in a data frame in R is surprising hard to do!
 
 ```{r,tidy=FALSE}
-head(specdata[, 1:7], 3)
-specdata <- rename(specdata, lat = Latitude, 
+specdata[, 5:7]
+```
+
+# `rename`
+
+```{r}
+specdata <- rename(specdata, 
+                   lat = Latitude, 
                    lon = Longitude)
-head(specdata[, 1:7], 3)
+select(specdata, 5:7)
 ```
 
 
 # `mutate`
 
 ```{r, tidy=FALSE}
-specdata <- mutate(specdata, 
-                   city_state = paste(City.Name, State.Name, sep = ", "),
-                   sample_mg = Sample.Value / 1000)
-head(select(specdata, City.Name, State.Name, city_state, sample_mg))
+specdata <- 
+        mutate(specdata, 
+               city_state = paste(City.Name, State.Name, 
+                                  sep = ", "),
+               sample_mg = Sample.Value / 1000)
+```
+```{r}
+select(specdata, City.Name, State.Name, city_state, 
+       sample_mg)
 ```
 
 # `group_by`
 
 Generating summary statistics by stratum
 
-```{r, tidy=FALSE}
-specdata <- mutate(specdata, 
-                   region = factor(lon > -100, 
-                                   labels = c("west", "east")))
+```{r, tidy = TRUE}
+specdata <- 
+        mutate(specdata, 
+               region = factor(lon > -100, 
+                               labels = c("west", "east")))
 eastwest <- group_by(specdata, region)
-summarize(eastwest, pollutant = mean(Sample.Value, na.rm = TRUE),
+summarize(eastwest, 
+          pollutant = mean(Sample.Value, na.rm = TRUE),
           obs = mean(Observation.Count, na.rm = TRUE))
 ```
 
@@ -197,12 +225,19 @@ summarize(eastwest, pollutant = mean(Sample.Value, na.rm = TRUE),
 
 Generating summary statistics by stratum
 
-```{r, tidy=FALSE}
+```{r, tidy=FALSE, message=FALSE}
 library(lubridate)
 specdata <- mutate(specdata, month = month(Date.Local))
 months <- group_by(specdata, month)
-months <- filter(months, Parameter.Name == "Sulfate PM2.5 LC")
-summarize(months, sulfate = mean(Sample.Value, na.rm = TRUE))
+months <- filter(months, 
+                 Parameter.Name == "Sulfate PM2.5 LC")
+```
+
+# `group_by`
+
+```{r}
+summarize(months, 
+          sulfate = mean(Sample.Value, na.rm = TRUE))
 ```
 
 ```{r,echo=FALSE}
@@ -215,9 +250,10 @@ specdata$month <- NULL  ## Can't use mutate to create an existing variable
 ```{r,tidy=FALSE,eval=FALSE}
 specdata %>% 
         mutate(month = month(Date.Local)) %>% 
-        filter(Parameter.Name == "Sulfate PM2.5 LC") %>%
+        filter(Parameter.Name=="Sulfate PM2.5 LC") %>%
         group_by(month) %>% 
-        summarize(sulfate = mean(Sample.Value, na.rm = TRUE))
+        summarize(sulfate = mean(Sample.Value, 
+                                 na.rm = TRUE))
 ```
 
 ```{r,echo=FALSE}
@@ -233,7 +269,7 @@ specdata %>%
 ```{r,tidy=FALSE,eval=FALSE}
 specdata %>% 
         mutate(month = month(Date.Local)) %>% 
-        filter(Parameter.Name == "Sulfate PM2.5 LC") %>%
+        filter(Parameter.Name=="Sulfate PM2.5 LC") %>%
         group_by(month, region) %>% 
         summarize(sulfate = mean(Sample.Value, na.rm = TRUE))
 ```
@@ -243,7 +279,8 @@ specdata %>%
         mutate(month = month(Date.Local)) %>% 
         filter(Parameter.Name == "Sulfate PM2.5 LC") %>%
         group_by(month, region) %>% 
-        summarize(sulfate = mean(Sample.Value, na.rm = TRUE))
+        summarize(sulfate = mean(Sample.Value, 
+                                 na.rm = TRUE))
 ```
 
 
@@ -257,26 +294,28 @@ Once you learn the dplyr "grammar" there are a few additional benefits
 
 * SQL interface for relational databases via the DBI package
 
+
 # tidyr
 
 The `tidyr` package helps with manipulation of data frames between "wide" and "long" formats, depending on what you're trying to do.
 
 * Sometimes the meaning of a "variable" depends on the application
 
-* Sometimes PM10, O3, NO2 are all different variables with continuous levels
+* Sometimes Sulfate, Aluminum, and Nitrate are all different variables with continuous levels (wide format)
 
-* Sometimes "Pollutant" is the variable with levels "PM10", "O3", and "NO2"
+* Sometimes "Pollutant" is the variable with levels "Sulfate", "Aluminum", and "Nitrate" and a *separate* column for the values (long format)s
 
 # Long Format
 
-```{r, include=FALSE}
-spec <- select(specdata, city_state, Date.Local, Parameter.Name, Sample.Value)
+```{r}
+spec <- select(specdata, city_state, Date.Local, 
+               Parameter.Name, Sample.Value)
 ```
 
 Here are the specdata pollution data in long format
 
 ```{r}
-head(spec)
+spec
 ```
 
 # Long Format
@@ -319,9 +358,9 @@ The `spread` function does the inverse of the `gather` function
 # `spread`
 
 ```{r}
-wide <- filter(spec, city_state == "Essex, Maryland") %>%
+wide <- filter(spec, city_state=="Essex, Maryland") %>%
         spread(Parameter.Name, Sample.Value) 
-head(wide)
+wide
 ```
 
 # `separate`
@@ -340,7 +379,8 @@ m
 # `separate`
 
 ```{r}
-m <- separate(m, mood, c("state", "activity"), sep = "-")
+m <- separate(m, mood, c("state", "activity"), 
+              sep = "-")
 m
 ```
 
