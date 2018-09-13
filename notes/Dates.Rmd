@@ -1,10 +1,14 @@
-% Dates and Times in R
-% Biostatistics 140.776
-%
+---
+title: "Dates and Times in R"
+subtitle: "Biostatistics 140.776"
+output:
+  beamer_presentation: default
+  ioslides_presentation: default
+---
 
 ```{r, include=FALSE}
-options(width = 50)
-knitr::opts_chunk$set(comment = NA)
+options(width = 50, tibble.print_min = 5)
+knitr::opts_chunk$set(comment = NA, collapse = TRUE)
 ```
 
 # Dates and Times in R
@@ -92,8 +96,7 @@ Time zones were created to make your data analyses more difficult.
 
 * Better to specify time zone when possible to avoid ambiguity
 
-You can go to Wikipedia to find the list of time zones [http://goo.gl/xJ8K6q]()
-
+You can go to Wikipedia to find the [list of time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
 
 
 # Specifying Times in R
@@ -128,21 +131,32 @@ x + y  ## Nope!
 
 # Operations on Dates and Times
 
+Add a second to a time
 ```{r}
-y + 1  ## Add a number to a time
-y <- date(y)  ## Just keep the date portion
+y + 1
+```
+Just keep the date portion
+```{r}
+y <- date(y)
 y
-y + 1  ## Add a number to a date
+```
+Add a number to the date (in this case 1 day)
+```{r}
+y + 1  
 ```
 
 # Operations on Dates and Times
 
 Even keeps track of leap years, leap seconds, daylight savings, and time zones.
 
+Leap years
 ```{r}
 x <- ymd("2012-03-01")
 y <- ymd("2012-02-28")
 x - y
+```
+Time zones!
+```{r}
 x <- ymd_hms("2012-10-25 01:00:00", tz = "")
 y <- ymd_hms("2012-10-25 06:00:00", tz = "GMT")
 y - x
