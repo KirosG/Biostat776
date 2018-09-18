@@ -105,6 +105,8 @@ Use the functions in `dplyr` and `tidyr` to produce a data frame that looks like
 
 You may need to use functions outside these packages to obtain this result.
 
+Note that the functions in the `dplyr` and `tidyr` package expect table-like objects (data frames or tibbles) as their input. You may need to convert data to these objects using the `tibble` package.
+
 ### Part 2
 
 Use the `readr` package to read the [SPEC_2014.csv.gz](data/SPEC_2014.csv.gz) data file in to R. This file contains daily levels of fine particulate matter (PM2.5) chemical constituents across the United States. The data are measured at a network of federal, state, and local monitors and assembled by the EPA. 
