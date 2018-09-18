@@ -144,4 +144,6 @@ Use the functions in the `dplyr` and `tidyr` packages to answer the following qu
 
 * The `*_join()` functions within the `dplyr` package may be of use here. Take a look at the help file for `left_join()` for example to get an explanation of what these functions do.
 
+* See the [notes on joining data](notes/pdf/join_data.pdf) for examples of how these functions work.
+
 
