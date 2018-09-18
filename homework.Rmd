@@ -138,4 +138,10 @@ Use the functions in the `dplyr` and `tidyr` packages to answer the following qu
 
 1. What are the median levels of "OC PM2.5 LC TOR" and "EC PM2.5 LC TOR" amongst monitoring sites that are labelled as both "RESIDENTIAL" and "SUBURBAN" in the eastern U.S., where eastern is defined as `Longitude` greater than or equal to -100?
 
+#### Notes
+
+* You will need to combine the data in the [aqs_sites.xlsx](data/aqs_sites.xlsx) file with the data from the previous Part in order to answer these questions.
+
+* The `*_join()` functions within the `dplyr` package may be of use here. Take a look at the help file for `left_join()` for example to get an explanation of what these functions do.
+
 
