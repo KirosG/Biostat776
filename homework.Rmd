@@ -134,7 +134,7 @@ Use the `readxl` package to read the file [aqs_sites.xlsx](data/aqs_sites.xlsx) 
 
 This file contains metadata about each of the monitoring sites in the EPA's monitoring system. In particular, the `Land Use` and `Location Setting` variables contain information about what kinds of areas the monitors are located in (i.e. "residential" vs. "forest").
 
-Use the functions in the `dplyr` and `tidyr` packages to answer the following questions.
+Use the functions in the `dplyr` package to answer the following questions.
 
 1. How many monitoring sites are labelled as both "RESIDENTIAL" for `Land Use` and "SUBURBAN" for `Location Setting`?
 

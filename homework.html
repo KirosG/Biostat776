@@ -340,7 +340,7 @@ WorldPhones</code></pre>
 <h3>Part 3</h3>
 <p>Use the <code>readxl</code> package to read the file <a href="data/aqs_sites.xlsx">aqs_sites.xlsx</a> into R (you may need to install the package first). You may get some warnings when reading in the data but you can ignore these for now.</p>
 <p>This file contains metadata about each of the monitoring sites in the EPA’s monitoring system. In particular, the <code>Land Use</code> and <code>Location Setting</code> variables contain information about what kinds of areas the monitors are located in (i.e. “residential” vs. “forest”).</p>
-<p>Use the functions in the <code>dplyr</code> and <code>tidyr</code> packages to answer the following questions.</p>
+<p>Use the functions in the <code>dplyr</code> package to answer the following questions.</p>
 <ol style="list-style-type: decimal">
 <li><p>How many monitoring sites are labelled as both “RESIDENTIAL” for <code>Land Use</code> and “SUBURBAN” for <code>Location Setting</code>?</p></li>
 <li><p>What are the median levels of “OC PM2.5 LC TOR” and “EC PM2.5 LC TOR” amongst monitoring sites that are labelled as both “RESIDENTIAL” and “SUBURBAN” in the eastern U.S., where eastern is defined as <code>Longitude</code> greater than or equal to -100?</p></li>
