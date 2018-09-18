@@ -1,0 +1,140 @@
+---
+title: "Joining Data"
+subtitle: Biostatistics 140.776
+output:
+  beamer_presentation: default
+  ioslides_presentation: default
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, collapse = TRUE, comment = NA)
+```
+
+
+
+## Joining Data
+
+The `dplyr` package provides a set of functions for joining two data frames into a single data frame based on a set of key columns.
+
+* `left_join()`
+
+* `right_join()`
+
+* `inner_join()`
+
+There are other functions for joining but they are less commonly used.
+
+
+## Left Join
+
+```{r, message = FALSE}
+library(dplyr)
+
+
+dat <- tibble(
+        id = rep(c("a", "b", "c"), each = 3),
+        visit = rep(0:2, 3),
+        outcome = rnorm(3 * 3, 3)
+)
+```
+
+## Left Join
+
+```{r}
+dat
+```
+
+## Left Join
+
+```{r}
+subjects <- tibble(
+        id = c("a", "b", "c"),
+        house = c("detached", "rowhouse", "rowhouse"),
+)
+```
+```{r}
+subjects
+```
+
+
+## Left Join
+
+```{r}
+left_join(dat, subjects, by = "id")
+```
+
+## Left Join
+
+```{r}
+subjects <- tibble(
+        id = c("a", "b", "c"),
+        visit = c(0, 1, 0),
+        house = c("detached", "rowhouse", "rowhouse"),
+)
+```
+```{r}
+subjects
+```
+
+## Left Join
+
+```{r}
+left_join(dat, subjects, by = c("id", "visit"))
+```
+
+
+## Left Join
+
+```{r}
+subjects <- tibble(
+        id = c("b", "c"),
+        visit = c(1, 0),
+        house = c("rowhouse", "rowhouse"),
+)
+```
+```{r}
+subjects
+```
+
+## Left Join
+
+```{r}
+left_join(dat, subjects, by = c("id", "visit"))
+```
+
+
+## Inner Join
+
+
+```{r}
+inner_join(dat, subjects, by = c("id", "visit"))
+```
+
+
+
+## Right Join
+
+```{r}
+right_join(dat, subjects, by = c("id", "visit"))
+```
+
+
+
+## Right Join
+
+```{r}
+right_join(subjects, dat, by = c("id", "visit"))
+```
+
+
+## Summary
+
+* `left_join()` is useful for merging a "large" data frame with a "smaller" one while retaining all the rows of the "large" data frame
+
+* `inner_join()` gives you the intersection of the rows between two data frames 
+
+* `right_join()` is like `left_join()` with the arguments reversed (likely only useful at the end of a pipeline)
+
+
