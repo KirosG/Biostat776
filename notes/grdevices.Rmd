@@ -1,6 +1,12 @@
-% Graphics Devices in R
-% Biostatistics 140.776
-%
+---
+title: "Graphics Devices in R"
+subtitle: Biostatistics 140.776
+output:
+  beamer_presentation: default
+  ioslides_presentation: default
+editor_options: 
+  chunk_output_type: console
+---
 
 
 # What is a Graphics Device?
